@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "files": [
+    "typings/ae-shims.d.ts",
+    "typings/txt-shims.d.ts",
+    "typings/vue-shims.d.ts",
+    "typings/svg-shims.d.ts"
+  ],
+  "include": [
+    "./src/**/*.ts",
+    "./stories/**/*.ts"
+  ]
+}

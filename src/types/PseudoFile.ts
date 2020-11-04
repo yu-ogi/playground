@@ -1,0 +1,98 @@
+export type PseudoFile =
+	| PseudoGameJSONFile
+	| PseudoScriptAssetFile
+	| PseudoTextAssetFile
+	| PseudoImageAssetFile
+	| PseudoAudioAssetFile
+	| PseudoUnknownAssetFile;
+
+export interface PseudoGameJSONFile {
+	name: "game.json";
+	filename: "game.json";
+	assetType: "game.json";
+	editorType: "text";
+	uri: string;
+	language: "json";
+	value: string;
+}
+
+export interface PseudoScriptAssetFile extends PseudoAssetFile {
+	assetType: "script";
+	editorType: "text";
+	language: "javascript" | "typescript";
+	value: string;
+}
+
+export interface PseudoTextAssetFile extends PseudoAssetFile {
+	assetType: "text";
+	editorType: "text";
+	language: "json" | "text";
+	value: string;
+}
+
+export interface PseudoImageAssetFile extends PseudoAssetFile {
+	assetType: "image";
+	editorType: "image";
+	blob: Blob;
+	width: number;
+	height: number;
+	hint?: any;
+}
+
+export interface PseudoAudioAssetFile extends PseudoAssetFile {
+	assetType: "audio";
+	editorType: "audio";
+	duration: number;
+	systemId: any;
+	loop: boolean;
+	hint?: any;
+}
+
+export interface PseudoUnknownAssetFile extends PseudoAssetFile {
+	assetType: "unknown";
+	editorType: "unknown";
+}
+
+export interface PseudoAssetFile {
+	/**
+	 * 名前
+	 */
+	name: string;
+	/**
+	 * ファイル名 (aco.png)
+	 */
+	filename: string;
+	/**
+	 * アセットのファイルパスまたは Uri
+	 */
+	uri: string;
+	/**
+	 * AkashicEditor が識別する種別
+	 */
+	editorType: string;
+	/**
+	 * 対象のアセットを AkashicEditor で readOnly とするか
+	 */
+	readOnly?: boolean;
+	/**
+	 * 対象のアセットを AkashicEditor で非表示とするか
+	 */
+	hidden?: boolean;
+	/**
+	 * akashic-engine の Asset#id
+	 */
+	id: string;
+	/**
+	 * akashic-engine の Asset#path
+	 */
+	path: string;
+	/**
+	 * akashic-engine の Asset#type
+	 * game.json の場合は "game.json"
+	 */
+	assetType: string;
+	/**
+	 * akashic-engine の Asset#global
+	 */
+	global?: boolean;
+}

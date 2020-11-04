@@ -1,0 +1,17 @@
+node_modules/
+lib/
+dist/
+tmp/
+public/js/*
+public/index.html
+
+spec/helpers/*.js
+junitresults.xml
+
+.DS_Store*
+*.log
+*.iml
+*.idea
+*.alm
+*.zip
+*.tgz
