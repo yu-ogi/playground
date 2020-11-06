@@ -1,7 +1,7 @@
 export type URIParameter = URIGameJSONParameter;
 
 export interface URIGameJSONParameter {
-	type: "gameJSONUri";
+	type: "gameJsonUri";
 	name: string;
 	uri: string;
 }

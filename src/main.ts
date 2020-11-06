@@ -30,12 +30,12 @@ const router = new VueRouter({
 			name: "edit",
 			component: PlaygroundPage,
 			props: router => {
-				const gameJSONUri = urlJoin(
+				const gameJsonUri = urlJoin(
 					`${window.location.protocol}//${window.location.host}/${window.location.pathname}`,
 					`presets/${router.params.name}/game.json`
 				);
 				return {
-					gameJSONUri,
+					gameJsonUri,
 					name: router.params.name
 				};
 			}
@@ -46,12 +46,12 @@ const router = new VueRouter({
 			component: SamplePage,
 			props: router => {
 				const params: URIParameter = JSON.parse(decode(router.params.base64_uri_params));
-				if (params.type !== "gameJSONUri") {
+				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
 				return {
 					name: params.name ?? "noname",
-					gameJSONUri: params.uri,
+					gameJsonUri: params.uri,
 					autoplay: router.query.autoplay === null // ?autoplay を解釈する (query の初期値は null)
 				};
 			}
@@ -62,13 +62,13 @@ const router = new VueRouter({
 			component: SnippetPage,
 			props: router => {
 				const params: URIParameter = JSON.parse(decode(router.params.base64_uri_params));
-				if (params.type !== "gameJSONUri") {
+				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
 				const autoplay = router.query.autoplay === null;
 				return {
 					name: params.name ?? "noname",
-					gameJSONUri: params.uri,
+					gameJsonUri: params.uri,
 					autoplay
 				};
 			}

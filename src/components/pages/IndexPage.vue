@@ -16,7 +16,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'helloworld',
 									uri: 'https://akashic-games.github.io/demo/content/helloworld/game.json'
 								})
@@ -36,7 +36,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'GalaxyWars',
 									uri: 'https://akashic-games.github.io/demo/content/GalaxyWars/game.json'
 								})
@@ -56,7 +56,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'HoppingWitch',
 									uri: 'https://akashic-games.github.io/demo/content/HoppingWitch/game.json'
 								})
@@ -76,7 +76,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'cannontv',
 									uri: 'https://akashic-games.github.io/demo/content/cannontv/game.json'
 								})
@@ -99,7 +99,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'helloworld',
 									uri: 'https://akashic-games.github.io/demo/content/helloworld/game.json'
 								})
@@ -116,7 +116,7 @@
 						params: {
 							base64_uri_params: encode(
 								JSON.stringify({
-									type: 'gameJSONUri',
+									type: 'gameJsonUri',
 									name: 'helloworld',
 									uri: 'https://akashic-games.github.io/demo/content/helloworld/game.json'
 								})

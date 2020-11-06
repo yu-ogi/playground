@@ -46,7 +46,7 @@ export default defineComponent({
 		GameController
 	},
 	props: {
-		gameJSONUri: {
+		gameJsonUri: {
 			type: String,
 			required: true
 		},
@@ -65,7 +65,7 @@ export default defineComponent({
 		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
 		const gameContext = inject(useGameContextKey) as UseGameContextStore;
 
-		gameConfs.fetchPseudoFilesFromUri(props.gameJSONUri);
+		gameConfs.fetchPseudoFilesFromUri(props.gameJsonUri);
 
 		const state = reactive<State>({
 			title: null,

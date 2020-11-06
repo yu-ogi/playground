@@ -49,7 +49,7 @@ export default defineComponent({
 		GameController
 	},
 	props: {
-		gameJSONUri: {
+		gameJsonUri: {
 			type: String,
 			required: true
 		},
@@ -75,7 +75,7 @@ export default defineComponent({
 		});
 
 		const handleClickOverlay = async () => {
-			await gameConfs.fetchPseudoFilesFromUri(props.gameJSONUri);
+			await gameConfs.fetchPseudoFilesFromUri(props.gameJsonUri);
 			// TODO: 重複ロジック
 			const gameJSON = gameConfs.pseudoFiles.find(({ assetType }) => assetType === "game.json");
 			gameContext.run(
