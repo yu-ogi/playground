@@ -10,6 +10,7 @@
     "url": "git+https://github.com/akashic-games/akashic-playground.git"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run format && run-s build:*",
     "build:webpack": "webpack --config webpack.prod.js",
     "format": "run-s format:*",
