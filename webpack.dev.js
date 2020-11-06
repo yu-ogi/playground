@@ -12,6 +12,6 @@ module.exports = merge(common, {
     inline: true,
     hot: true,
     progress: true,
-    port: 8080
+    port: 8090
   }
 });
