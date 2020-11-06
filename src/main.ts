@@ -2,7 +2,7 @@ import VueCompositionApi from "@vue/composition-api";
 import urlJoin from "url-join";
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { URIParameter } from "./types/URIParameter";
+import { UriParameter } from "./types/UriParameter";
 import IndexPage from "~/components/pages/IndexPage.vue";
 import PlaygroundPage from "~/components/pages/PlaygroundPage.vue";
 import RootPage from "~/components/pages/RootPage.vue";
@@ -45,7 +45,7 @@ const router = new VueRouter({
 			name: "sample",
 			component: SamplePage,
 			props: router => {
-				const params: URIParameter = JSON.parse(decode(router.params.base64_uri_params));
+				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params));
 				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
@@ -61,7 +61,7 @@ const router = new VueRouter({
 			name: "snippet",
 			component: SnippetPage,
 			props: router => {
-				const params: URIParameter = JSON.parse(decode(router.params.base64_uri_params));
+				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params));
 				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
