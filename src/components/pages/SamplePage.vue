@@ -32,6 +32,15 @@ import { useGameContext, useGameContextKey, UseGameContextStore } from "~/compos
 import { useGameJSONResolver, useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
 
 const marked = require("marked");
+const renderer = new marked.Renderer();
+renderer.link = function (href: string, title: string, text: string) {
+	const link = marked.Renderer.prototype.link.call(this, href, title, text);
+	return link.replace("<a ", "<a target='_parent' ");
+};
+
+marked.setOptions({
+	renderer
+});
 
 export interface State {
 	title: string | null;
