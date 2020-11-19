@@ -1,3 +1,6 @@
+![test](https://github.com/akashic-games/playground/workflows/test/badge.svg?branch=main)
+![deploy](https://github.com/akashic-games/playground/workflows/deploy/badge.svg?branch=main)
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/akashic-games/playground/main/img/akashic.png" />
 </p>
