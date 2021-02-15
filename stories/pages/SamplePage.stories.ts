@@ -8,7 +8,7 @@ export const Default = () => ({
 	components: { SamplePage },
 	template: `
 	<div style="height: 100vh;">
-		<SamplePage gameJsonUri="/default/game.json" />
+		<SamplePage gameJsonUri="/default/game.json" name="dummy" />
 	</div>
 	`
 });

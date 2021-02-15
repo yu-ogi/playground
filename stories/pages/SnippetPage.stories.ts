@@ -20,7 +20,7 @@ export const Default = () => ({
 	components: { SnippetPage },
 	template: `
 	<div style="height: 100vh;">
-		<SnippetPage gameJsonUri="/default/game.json" />
+		<SnippetPage gameJsonUri="/default/game.json" name="dummy" />
 	</div>
 	`
 });
@@ -29,7 +29,7 @@ export const Autorun = () => ({
 	components: { SnippetPage },
 	template: `
 	<div style="height: 100vh;">
-		<SnippetPage gameJsonUri="/default/game.json" :autoplay="true" />
+		<SnippetPage gameJsonUri="/default/game.json" name="dummy" :autoplay="true" />
 	</div>
 	`
 });
