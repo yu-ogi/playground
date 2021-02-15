@@ -121,6 +121,7 @@ export default defineComponent({
 		bottom: 3px;
 		right: 3px;
 		color: whitesmoke;
+		z-index: 1;
 	}
 }
 
@@ -174,6 +175,7 @@ export default defineComponent({
 		bottom: 3px;
 		right: 3px;
 		color: whitesmoke;
+		z-index: 1;
 	}
 }
 </style>
