@@ -35,7 +35,7 @@ const marked = require("marked");
 const renderer = new marked.Renderer();
 renderer.link = function (href: string, title: string, text: string) {
 	const link = marked.Renderer.prototype.link.call(this, href, title, text);
-	return link.replace("<a ", "<a target='_parent' ");
+	return link.replace("<a ", "<a target='_blank' ref='noopener'");
 };
 
 marked.setOptions({
