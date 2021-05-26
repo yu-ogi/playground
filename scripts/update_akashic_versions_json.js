@@ -12,18 +12,28 @@ const release_url = "https://github.com/akashic-games/akashic-engine-standalone-
     // NOTE: ["3.0.0-beta.31", "3.0.0-beta.32", ..] -> [.., "3.0.0-beta.32", "3.0.0-beta.31"]
     const versions = ret.match(/'(.+)'/g).map(v => v.slice(1, -1)).reverse();
 
+    const foundVersions = [];
     for (let i = 0; i < versions.length; i++) {
       const version = versions[i];
       const output = path.join(__dirname, "..", "public", "engine", `akashic-engine-standalone-${version}.js`);
-      if (fs.existsSync(output)) continue;
+      if (fs.existsSync(output)) {
+        foundVersions.push(version);
+        continue;
+      }
       const url = release_url.replace("%TAG%", encodeURIComponent(`akashic-engine@${version}`)).replace("%VERSION%", version);
-      const js = await axios(url);
-      fs.writeFileSync(output, js.data);
+      try {
+        const js = await axios(url);
+        fs.writeFileSync(output, js.data);
+        foundVersions.push(version);
+      } catch (e) {
+        // ignore when not found
+        console.log("skipped", version, e.message);
+      }
     }
 
     const versionsJSONPath = path.join(__dirname, "..", "src", "constants", "versions.json");
     const versionsJSON = JSON.parse(fs.readFileSync(versionsJSONPath, "utf-8"));
-    versionsJSON.akashicEngineVersions = versions.map(v => ({
+    versionsJSON.akashicEngineVersions = foundVersions.map(v => ({
       version: v,
       name: `akashic-engine-standalone-${v}.js`
     }));

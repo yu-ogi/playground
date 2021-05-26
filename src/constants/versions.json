@@ -2,6 +2,14 @@
   "version": "1",
   "akashicEngineVersions": [
     {
+      "version": "3.0.4",
+      "name": "akashic-engine-standalone-3.0.4.js"
+    },
+    {
+      "version": "3.0.0-beta.37",
+      "name": "akashic-engine-standalone-3.0.0-beta.37.js"
+    },
+    {
       "version": "3.0.0-beta.33",
       "name": "akashic-engine-standalone-3.0.0-beta.33.js"
     },
