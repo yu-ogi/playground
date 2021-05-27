@@ -28,7 +28,13 @@ npm run dev
 以下のコマンドで、エンジンの新しいバージョンを検出して取り込みます。
 
 ```sh
-npm run update-engines
+npm run update-engines # エンジンファイルの更新
+```
+
+その後、手動で以下のコマンドを実行してください。
+
+```sh
+node scripts/generate_akashic_definitions.js 3.0.4 # akashic-engine@3.0.4 に更新する場合
 ```
 
 # deploy
