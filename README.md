@@ -23,6 +23,14 @@ npm run build
 npm run dev
 ```
 
+## update engine
+
+以下のコマンドで、エンジンの新しいバージョンを検出して取り込みます。
+
+```sh
+npm run update-engines
+```
+
 # deploy
 
 以下のコマンドで gh-pages 上にデプロイできます。

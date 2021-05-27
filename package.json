@@ -13,6 +13,7 @@
     "prepare": "npm run build",
     "build": "npm run format && run-s build:*",
     "build:webpack": "webpack --config webpack.prod.js",
+    "update-engines": "node scripts/update_akashic_versions_json.js",
     "format": "run-s format:*",
     "format:prettier": "prettier --write \"src/**/*.{ts,vue}\" --config prettier.config.json",
     "format:eslint": "eslint \"src/**/*.{ts,vue}\" --fix",
