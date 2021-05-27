@@ -32,9 +32,10 @@ npm run update-engines # エンジンファイルの更新
 ```
 
 その後、手動で以下のコマンドを実行してください。
+(akashic-engine の依存モジュールの型定義は以下のコマンド実行時点での最新に置き換わります)
 
 ```sh
-node scripts/generate_akashic_definitions.js 3.0.4 # akashic-engine@3.0.4 に更新する場合
+node scripts/generate_akashic_definitions.js 3.0.4 # akashic-engine@3.0.4 の型定義を生成する場合
 ```
 
 # deploy
