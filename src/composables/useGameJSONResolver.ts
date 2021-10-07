@@ -169,7 +169,7 @@ export function useGameJSONResolver() {
 				value,
 				global
 			};
-		} else if (asset.type === "image") {
+		} else if (asset.type === "image" || asset.type === "vector-image") {
 			const blob = (await axios.get(uri, { responseType: "blob" })).data;
 			return {
 				id: assetId,
@@ -255,6 +255,15 @@ export function useGameJSONResolver() {
 			} else if (asset.assetType === "image") {
 				gameJSON.assets[asset.id] = {
 					type: "image",
+					path: asset.path,
+					width: asset.width,
+					height: asset.height,
+					hint: asset.hint,
+					global: asset.global
+				};
+			} else if (asset.assetType === "vector-image") {
+				gameJSON.assets[asset.id] = {
+					type: "vector-image",
 					path: asset.path,
 					width: asset.width,
 					height: asset.height,

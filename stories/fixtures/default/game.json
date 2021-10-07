@@ -18,6 +18,12 @@
       "height": 16,
       "path": "image/shot.png"
     },
+    "logo": {
+      "type": "vector-image",
+      "width": 150,
+      "height": 107,
+      "path": "image/logo.svg"
+    },
     "se": {
       "type": "audio",
       "path": "audio/se",
