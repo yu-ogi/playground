@@ -16,7 +16,7 @@ export async function downloadAsZip(name: string, pseudoFiles: PseudoFile[]) {
 			const dir = zip.folder(path.dirname(file.path));
 			if (!dir) continue;
 			dir.file(file.filename, file.value);
-		} else if (file.assetType === "image") {
+		} else if (file.assetType === "image" || file.assetType === "vector-image") {
 			const dir = zip.folder(path.dirname(file.path));
 			if (!dir) continue;
 			dir.file(file.filename, file.blob, { binary: true });

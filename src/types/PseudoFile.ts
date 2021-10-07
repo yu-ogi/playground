@@ -3,6 +3,7 @@ export type PseudoFile =
 	| PseudoScriptAssetFile
 	| PseudoTextAssetFile
 	| PseudoImageAssetFile
+	| PseudoVectorImageAssetFile
 	| PseudoAudioAssetFile
 	| PseudoUnknownAssetFile;
 
@@ -32,6 +33,15 @@ export interface PseudoTextAssetFile extends PseudoAssetFile {
 
 export interface PseudoImageAssetFile extends PseudoAssetFile {
 	assetType: "image";
+	editorType: "image";
+	blob: Blob;
+	width: number;
+	height: number;
+	hint?: any;
+}
+
+export interface PseudoVectorImageAssetFile extends PseudoAssetFile {
+	assetType: "vector-image";
 	editorType: "image";
 	blob: Blob;
 	width: number;
