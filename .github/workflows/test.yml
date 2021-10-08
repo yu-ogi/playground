@@ -18,6 +18,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
+      - name: Use npm@7
+        run: npm i -g npm@7 --registry=https://registry.npmjs.org
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -29,11 +35,8 @@ jobs:
             ${{ env.cache-version }}-${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ env.cache-version }}-${{ runner.os }}-build-
             ${{ env.cache-version }}-${{ runner.os }}-
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
       - name: Run test
         run: |
+          npm cache verify
           npm ci
           npm test
