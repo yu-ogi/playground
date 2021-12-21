@@ -2,10 +2,10 @@
 	<div>
 		<Button class="download-button" :onClick="handleClickDownloadAsZip" title="download as Zip">
 			<template v-if="state.processing">
-				<i class="rotate"></i>
+				<v-icon class="rotate">mdi-reload</v-icon>
 			</template>
 			<template v-else>
-				<i class="material-icons md-36">cloud_download</i>
+				<v-icon color="white">mdi-download</v-icon>
 			</template>
 		</Button>
 	</div>
@@ -57,11 +57,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.download-button {
-	width: 60px;
-	height: 60px;
-	border-radius: 100%;
-}
 .rotate:before {
 	content: "";
 	box-sizing: border-box;

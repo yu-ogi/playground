@@ -1,9 +1,13 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 
 module.exports = {
+  target: ["web", "es5"],
   entry: {
     bundle: "./src/main.ts",
     // "editor.worker": "monaco-editor/esm/vs/editor/editor.worker.js",
@@ -24,7 +28,7 @@ module.exports = {
         test: /\.ts$/,
         use: {
           loader: "ts-loader",
-          query: {
+          options: {
             appendTsSuffixTo: [/\.vue$/],
           }
         }
@@ -36,11 +40,25 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.s(c|a)ss$/,
         use: [
-          "style-loader",
+          "vue-style-loader",
           "css-loader",
-          "sass-loader"
+          {
+            loader: "sass-loader",
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require("sass"),
+              indentedSyntax: true // optional
+            },
+            // Requires >= sass-loader@^8.0.0
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                indentedSyntax: true // optional
+              }
+            }
+          }
         ]
       },
       {
@@ -84,21 +102,36 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js", ".vue", ".json"],
+    fallback: {
+      path: require.resolve("path-browserify")
+    },
     alias: {
+      process: "process/browser",
       vue$: "vue/dist/vue.esm.js",
       "~": path.resolve(__dirname, "src")
     }
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser"
+    }),
     new MonacoWebpackPlugin({
       languages: ["javascript", "typescript", "json"]
     }),
     new VueLoaderPlugin(),
+    new VuetifyLoaderPlugin(),
     new HtmlWebpackPlugin({
       filename: "../index.html",
       template: path.resolve(__dirname, "html", "index.template.html"),
       favicon: path.resolve(__dirname, "public", "favicon.ico"),
       hash: true
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      })
+    ]
+  }
 };

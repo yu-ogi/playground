@@ -8,10 +8,9 @@ import PlaygroundPage from "~/components/pages/PlaygroundPage.vue";
 import RootPage from "~/components/pages/RootPage.vue";
 import SamplePage from "~/components/pages/SamplePage.vue";
 import SnippetPage from "~/components/pages/SnippetPage.vue";
+import TestPage from "~/components/pages/TestPage.vue";
+import vuetify from "~/plugins/vuetify";
 import { decode } from "~/utils/Base64";
-
-// import global style
-import "~/assets/global.scss";
 
 Vue.config.productionTip = true;
 
@@ -24,6 +23,11 @@ const router = new VueRouter({
 			path: "/",
 			name: "index",
 			component: IndexPage
+		},
+		{
+			path: "/test",
+			name: "test",
+			component: TestPage
 		},
 		{
 			path: "/edit/:name/",
@@ -78,11 +82,13 @@ const router = new VueRouter({
 
 new Vue({
 	el: "#app",
+	vuetify,
 	components: {
 		IndexPage,
 		RootPage,
 		PlaygroundPage,
-		SamplePage
+		SamplePage,
+		TestPage
 	},
 	template: "<RootPage />",
 	router

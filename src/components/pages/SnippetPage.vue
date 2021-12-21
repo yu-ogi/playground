@@ -4,7 +4,7 @@
 	<div class="snippet-page-container">
 		<div v-if="!state.ready" class="container-overlay pointer" @click="handleClickOverlay">
 			<span class="text">コードを実行</span>
-			<span class="icon"><i class="material-icons md-120">play_arrow</i></span>
+			<span class="icon"><v-icon x-large>mdi-play-box</v-icon></span>
 		</div>
 		<div class="container-page-tab">
 			<ul>

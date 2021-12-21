@@ -6,12 +6,21 @@ module.exports = merge(common, {
   mode: "development",
   devtool: "source-map",
   devServer: {
-    watchContentBase: true,
-    contentBase: path.resolve(__dirname, "src"),
-    index: "index.html",
-    inline: true,
-    hot: true,
-    progress: true,
+    static: {
+      directory: path.resolve(__dirname, "public"),
+      watch: true
+    },
+    client: {
+      logging: "verbose",
+      overlay: true,
+      progress: true
+    },
+    watchFiles: [
+      path.resolve(__dirname, "src")
+    ],
+    compress: true,
+    liveReload: true,
+    hot: false,
     port: 8090
   }
 });

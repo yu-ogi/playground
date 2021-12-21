@@ -1,12 +1,20 @@
 module.exports = {
+  root: true,
   parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
     sourceType: "module",
     ecmaVersion: 2020,
+    project: "tsconfig.json",
     ecmaFeatures: {
       jsx: true
-    }
+    },
+    extraFileExtensions: [
+      ".vue"
+    ]
+  },
+  env: {
+    "jest": true
   },
   plugins: [
     "import",
@@ -14,15 +22,17 @@ module.exports = {
   ],
   extends: [
     "plugin:vue/vue3-recommended",
-    "prettier",
-    "prettier/vue",
-    "prettier/@typescript-eslint",
+    "prettier"
   ],
-  ignorePatterns: "public/**/*.d.ts",
+  ignorePatterns: [
+    "public/**/*.d.ts",
+    "*.js"
+  ],
   rules: {
     // TODO
     "vue/html-indent": "off",
     "vue/attribute-hyphenation": "off",
+    "vue/multi-word-component-names": "off",
     "import/order": ["error", {
       "alphabetize": {
         "order": "asc",

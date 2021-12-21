@@ -1,5 +1,7 @@
 <template>
-	<router-view />
+	<v-app id="inspire">
+		<router-view />
+	</v-app>
 </template>
 
 <style>
@@ -9,12 +11,9 @@
 	box-sizing: border-box;
 }
 
-html {
-	width: 100%;
-	height: 100%;
-}
-
-body {
+html,
+body,
+#inspire {
 	width: 100%;
 	height: 100%;
 }

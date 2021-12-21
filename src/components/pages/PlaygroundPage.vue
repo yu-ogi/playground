@@ -1,22 +1,19 @@
 <!-- Playground のページ -->
 
 <template>
-	<div class="playground-page-container">
-		<div class="container-header">
-			<div class="logo">Akashic Playground</div>
-		</div>
-		<div class="container-body">
-			<div class="container-editor">
+	<v-container ma-0 pa-0 fluid fill-height>
+		<v-row dense no-gutters>
+			<v-col sm="7">
 				<AkashicEditor :pseudoFiles="gameConfs.pseudoFiles" />
-			</div>
-			<div class="container-agv hidden-scrollbar">
+			</v-col>
+			<v-col sm="5">
 				<GameController />
-			</div>
-		</div>
+			</v-col>
+		</v-row>
 		<div class="container-download">
 			<DownloadButton :pseudoFiles="gameConfs.pseudoFiles" :name="props.name + '.' + Date.now()" />
 		</div>
-	</div>
+	</v-container>
 </template>
 
 <script lang="ts">

@@ -8,18 +8,22 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "types": [
+      "jest",
+      "vuetify"
+    ],
     "paths": {
       "~/*": ["src/*"]
     }
   },
   "files": [
-    "typings/ae-shims.d.ts",
     "typings/txt-shims.d.ts",
     "typings/vue-shims.d.ts",
     "typings/svg-shims.d.ts"
   ],
   "include": [
     "./src/**/*.ts",
+    "./src/**/*.vue",
     "./stories/**/*.ts"
   ]
 }

@@ -1,3 +1,4 @@
+import * as AE from "@akashic/akashic-engine-standalone";
 import { InjectionKey, reactive } from "@vue/composition-api";
 import Vue from "vue";
 import { GameConfiguration } from "~/types/AkashicEngineStandalone";

@@ -27,7 +27,7 @@ export default defineComponent({
 		const gameCanvasRef = ref<InstanceType<typeof GameCanvas>>();
 
 		onMounted(() => {
-			const canvas = gameCanvasRef.value!.getCanvasElement();
+			const canvas = (gameCanvasRef.value! as any).getCanvasElement();
 			gameContext.setCanvas(canvas);
 		});
 

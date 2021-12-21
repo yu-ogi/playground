@@ -1,6 +1,6 @@
 <template>
 	<div class="image-viewer-container">
-		<img :src="props.src" :title="props.id" :width="props.width" :height="props.height" class="transparent" />
+		<img :src="props.src" :title="props.id" :width="props.width" :height="props.height" class="canvas-transparent" />
 	</div>
 </template>
 
