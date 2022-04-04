@@ -14,6 +14,7 @@ module.exports = {
   ],
   extends: [
     "plugin:vue/vue3-recommended",
+    "plugin:jest/recommended",
     "prettier",
     "prettier/vue",
     "prettier/@typescript-eslint",
@@ -34,5 +35,8 @@ module.exports = {
     "unused-imports/no-unused-vars-ts": [
       "off" // TODO: 誤検知のため一旦 off
     ]
+  },
+  globals: {
+    AE: true
   }
 }

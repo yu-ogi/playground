@@ -25,7 +25,7 @@
 						>
 						<span v-else-if="gameConfs.pseudoFiles[i].editorType === 'audio'"
 							><i class="material-icons inline" style="color: #084f93">music_note</i></span
-						>　
+						>
 						<span v-else>❓</span>
 						{{ asset.filename }}
 					</li>
