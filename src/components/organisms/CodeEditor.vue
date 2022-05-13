@@ -53,7 +53,7 @@ export default defineComponent({
 				automaticLayout: true,
 				scrollBeyondLastLine: false,
 				scrollbar: {
-					alwaysConsumeMouseWheel: true
+					alwaysConsumeMouseWheel: false
 				},
 				minimap: {
 					enabled: false
