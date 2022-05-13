@@ -34,7 +34,6 @@ export function useGameContext() {
 	};
 
 	function handleError(err: ErrorEvent) {
-		if (err.message === "ResizeObserver loop limit exceeded") return;
 		addConsole({
 			type: "error",
 			name: err.toString(),
