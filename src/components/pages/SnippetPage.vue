@@ -6,7 +6,7 @@
 			<span class="text">コードを実行</span>
 			<span class="icon"><i class="material-icons md-120">play_arrow</i></span>
 		</div>
-		<div class="container-page-tab">
+		<div v-show="!props.noMenu" class="container-page-tab">
 			<ul>
 				<li class="page-tab" :class="{ active: state.currentPageTabName === 'code' }">
 					<a @click="changeCurrentPageTab('code')">CODE</a>
@@ -22,7 +22,7 @@
 		<div v-show="state.currentPageTabName === 'code'" class="container-editor">
 			<AkashicEditor :pseudoFiles="gameConfs.pseudoFiles" />
 		</div>
-		<div class="container-download">
+		<div v-show="!props.noDownloadButton" class="container-download">
 			<DownloadButton :pseudoFiles="gameConfs.pseudoFiles" :name="props.name + '.' + Date.now()" />
 		</div>
 	</div>
@@ -60,6 +60,14 @@ export default defineComponent({
 		name: {
 			type: String,
 			required: true
+		},
+		noDownloadButton: {
+			type: Boolean,
+			default: false
+		},
+		noMenu: {
+			type: Boolean,
+			default: false
 		}
 	},
 	setup(props) {

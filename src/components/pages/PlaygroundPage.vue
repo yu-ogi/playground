@@ -13,7 +13,7 @@
 				<GameController />
 			</div>
 		</div>
-		<div class="container-download">
+		<div v-show="!props.noDownloadButton" class="container-download">
 			<DownloadButton :pseudoFiles="gameConfs.pseudoFiles" :name="props.name + '.' + Date.now()" />
 		</div>
 	</div>
@@ -51,6 +51,10 @@ export default defineComponent({
 			type: String,
 			required: false,
 			default: undefined
+		},
+		noDownloadButton: {
+			type: Boolean,
+			default: false
 		}
 	},
 	setup(props) {

@@ -36,7 +36,8 @@ const router = new VueRouter({
 				);
 				return {
 					gameJsonUri,
-					name: router.params.name
+					name: router.params.name,
+					noDownloadButton: router.query.nodownload === null // download ボタンを非表示化 (query の初期値は null)
 				};
 			}
 		},
@@ -52,7 +53,8 @@ const router = new VueRouter({
 				return {
 					name: params.name ?? "noname",
 					gameJsonUri: params.uri,
-					autoplay: router.query.autoplay === null // ?autoplay を解釈する (query の初期値は null)
+					autoplay: router.query.autoplay === null, // ?autoplay を解釈する (query の初期値は null)
+					noDownloadButton: router.query.nodownload === null // download ボタンを非表示化 (query の初期値は null)
 				};
 			}
 		},
@@ -66,10 +68,14 @@ const router = new VueRouter({
 					throw new Error("Parse Error: unknown uri parameter");
 				}
 				const autoplay = router.query.autoplay === null;
+				const noDownloadButton = router.query.nodownload === null;
+				const noMenu = router.query.nomenu === null;
 				return {
 					name: params.name ?? "noname",
 					gameJsonUri: params.uri,
-					autoplay
+					autoplay,
+					noDownloadButton,
+					noMenu // GAME, CODE のタブメニューを非表示化 (query の初期値は null)
 				};
 			}
 		}

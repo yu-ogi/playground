@@ -17,7 +17,7 @@
 		<div class="container-editor hidden-scrollbar">
 			<AkashicEditor :pseudoFiles="gameConfs.pseudoFiles" />
 		</div>
-		<div class="container-download">
+		<div v-show="!props.noDownloadButton" class="container-download">
 			<DownloadButton :pseudoFiles="gameConfs.pseudoFiles" :name="props.name + '.' + Date.now()" />
 		</div>
 	</div>
@@ -66,6 +66,10 @@ export default defineComponent({
 		name: {
 			type: String,
 			required: true
+		},
+		noDownloadButton: {
+			type: Boolean,
+			default: false
 		}
 	},
 	setup(props) {
