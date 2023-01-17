@@ -6,7 +6,7 @@
 			<li><router-link :to="{ name: 'edit', params: { name: 'timeline' } }">Playground (timeline)</router-link></li>
 			<li><router-link :to="{ name: 'edit', params: { name: 'label' } }">Playground (label)</router-link></li>
 			<li>
-				<router-link :to="{ name: 'edit', params: { name: 'box2d' }, query: { nodownload: null } }"
+				<router-link :to="{ name: 'edit', params: { name: 'box2d' }, query: { nodl: null } }"
 					>Playground (box2d, DLボタン非表示)</router-link
 				>
 			</li>
@@ -68,7 +68,7 @@
 						},
 						query: {
 							autoplay: null,
-							nodownload: null
+							nodl: null
 						}
 					}"
 					>HoppingWitch (DLボタン非表示)</router-link
@@ -149,11 +149,11 @@
 						},
 						query: {
 							autoplay: null,
-							nomenu: null,
-							nodownload: null
+							notab: null,
+							nodl: null
 						}
 					}"
-					>Hello World (メニュー,DLボタン非表示)</router-link
+					>Hello World (autoplay,メニュー,DLボタン非表示)</router-link
 				>
 			</li>
 		</ul>
