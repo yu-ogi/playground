@@ -69,13 +69,13 @@ const router = new VueRouter({
 				}
 				const autoplay = router.query.autoplay === null;
 				const noDownloadButton = router.query.nodownload === null;
-				const noMenu = router.query.nomenu === null;
+				const noMenu = router.query.nomenu === null;  // GAME, CODE のタブメニューを非表示化 (query の初期値は null)
 				return {
 					name: params.name ?? "noname",
 					gameJsonUri: params.uri,
 					autoplay,
 					noDownloadButton,
-					noMenu // GAME, CODE のタブメニューを非表示化 (query の初期値は null)
+					noMenu
 				};
 			}
 		}
