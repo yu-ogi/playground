@@ -153,7 +153,7 @@
 							nodl: null
 						}
 					}"
-					>Hello World (autoplay,メニュー,DLボタン非表示)</router-link
+					>Hello World (autoplay, タブ & DLボタン非表示)</router-link
 				>
 			</li>
 		</ul>
