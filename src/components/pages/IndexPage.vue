@@ -5,7 +5,11 @@
 			<li><router-link :to="{ name: 'edit', params: { name: 'default' } }">Playground (default)</router-link></li>
 			<li><router-link :to="{ name: 'edit', params: { name: 'timeline' } }">Playground (timeline)</router-link></li>
 			<li><router-link :to="{ name: 'edit', params: { name: 'label' } }">Playground (label)</router-link></li>
-			<li><router-link :to="{ name: 'edit', params: { name: 'box2d' } }">Playground (box2d)</router-link></li>
+			<li>
+				<router-link :to="{ name: 'edit', params: { name: 'box2d' }, query: { nodl: null } }"
+					>Playground (box2d, DLボタン非表示)</router-link
+				>
+			</li>
 		</ul>
 		<h2>Sample</h2>
 		<ul>
@@ -63,10 +67,11 @@
 							)
 						},
 						query: {
-							autoplay: null
+							autoplay: null,
+							nodl: null
 						}
 					}"
-					>HoppingWitch</router-link
+					>HoppingWitch (DLボタン非表示)</router-link
 				>
 			</li>
 			<li>
@@ -127,6 +132,28 @@
 						}
 					}"
 					>Hello World (autoplay)</router-link
+				>
+			</li>
+			<li>
+				<router-link
+					:to="{
+						name: 'snippet',
+						params: {
+							base64_uri_params: encode(
+								JSON.stringify({
+									type: 'gameJsonUri',
+									name: 'helloworld',
+									uri: 'https://akashic-games.github.io/demo/content/helloworld/game.json'
+								})
+							)
+						},
+						query: {
+							autoplay: null,
+							notab: null,
+							nodl: null
+						}
+					}"
+					>Hello World (autoplay, タブ &amp; DLボタン非表示)</router-link
 				>
 			</li>
 		</ul>
