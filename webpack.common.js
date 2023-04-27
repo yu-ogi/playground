@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { ProvidePlugin } = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -24,7 +26,7 @@ module.exports = {
         test: /\.ts$/,
         use: {
           loader: "ts-loader",
-          query: {
+          options: {
             appendTsSuffixTo: [/\.vue$/],
           }
         }
@@ -89,6 +91,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js", ".vue", ".json"],
+    fallback: {
+      path: require.resolve("path-browserify")
+    },
     alias: {
       vue$: "vue/dist/vue.esm.js",
       "~": path.resolve(__dirname, "src")
@@ -104,6 +109,14 @@ module.exports = {
       template: path.resolve(__dirname, "html", "index.template.html"),
       favicon: path.resolve(__dirname, "public", "favicon.ico"),
       hash: true
+    }),
+    new ProvidePlugin({
+      process: "process/browser"
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin({
+      extractComments: false,
+    })]
+  }
 };
