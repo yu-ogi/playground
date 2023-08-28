@@ -2,6 +2,66 @@
   "version": "1",
   "akashicEngineVersions": [
     {
+      "version": "3.14.1",
+      "name": "akashic-engine-standalone-3.14.1.js"
+    },
+    {
+      "version": "3.14.0",
+      "name": "akashic-engine-standalone-3.14.0.js"
+    },
+    {
+      "version": "3.12.0",
+      "name": "akashic-engine-standalone-3.12.0.js"
+    },
+    {
+      "version": "3.11.2",
+      "name": "akashic-engine-standalone-3.11.2.js"
+    },
+    {
+      "version": "3.11.1",
+      "name": "akashic-engine-standalone-3.11.1.js"
+    },
+    {
+      "version": "3.11.0",
+      "name": "akashic-engine-standalone-3.11.0.js"
+    },
+    {
+      "version": "3.10.0",
+      "name": "akashic-engine-standalone-3.10.0.js"
+    },
+    {
+      "version": "3.9.3",
+      "name": "akashic-engine-standalone-3.9.3.js"
+    },
+    {
+      "version": "3.9.2",
+      "name": "akashic-engine-standalone-3.9.2.js"
+    },
+    {
+      "version": "3.9.0",
+      "name": "akashic-engine-standalone-3.9.0.js"
+    },
+    {
+      "version": "3.8.0",
+      "name": "akashic-engine-standalone-3.8.0.js"
+    },
+    {
+      "version": "3.7.1",
+      "name": "akashic-engine-standalone-3.7.1.js"
+    },
+    {
+      "version": "3.7.0",
+      "name": "akashic-engine-standalone-3.7.0.js"
+    },
+    {
+      "version": "3.6.0",
+      "name": "akashic-engine-standalone-3.6.0.js"
+    },
+    {
+      "version": "3.5.1",
+      "name": "akashic-engine-standalone-3.5.1.js"
+    },
+    {
       "version": "3.5.0",
       "name": "akashic-engine-standalone-3.5.0.js"
     },
