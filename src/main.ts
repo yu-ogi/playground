@@ -1,34 +1,25 @@
-import VueCompositionApi from "@vue/composition-api";
 import urlJoin from "url-join";
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createApp } from "vue";
+import { createRouter, createWebHashHistory } from "vue-router";
 import { UriParameter } from "./types/UriParameter";
-import IndexPage from "~/components/pages/IndexPage.vue";
-import PlaygroundPage from "~/components/pages/PlaygroundPage.vue";
-import RootPage from "~/components/pages/RootPage.vue";
-import SamplePage from "~/components/pages/SamplePage.vue";
-import SnippetPage from "~/components/pages/SnippetPage.vue";
+import App from "~/components/pages/RootPage.vue";
 import { decode } from "~/utils/Base64";
 
 // import global style
 import "~/assets/global.scss";
 
-Vue.config.productionTip = true;
-
-Vue.use(VueCompositionApi);
-Vue.use(VueRouter);
-
-const router = new VueRouter({
+const router = createRouter({
+	history: createWebHashHistory(),
 	routes: [
 		{
 			path: "/",
 			name: "index",
-			component: IndexPage
+			component: () => import("~/components/pages/IndexPage.vue")
 		},
 		{
 			path: "/edit/:name/",
 			name: "edit",
-			component: PlaygroundPage,
+			component: () => import("~/components/pages/PlaygroundPage.vue"),
 			props: router => {
 				const gameJsonUri = urlJoin(
 					`${window.location.protocol}//${window.location.host}/${window.location.pathname}`,
@@ -44,9 +35,9 @@ const router = new VueRouter({
 		{
 			path: "/samples/:base64_uri_params",
 			name: "sample",
-			component: SamplePage,
+			component: () => import("~/components/pages/SamplePage.vue"),
 			props: router => {
-				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params));
+				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params.toString()));
 				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
@@ -61,9 +52,9 @@ const router = new VueRouter({
 		{
 			path: "/snippets/:base64_uri_params",
 			name: "snippet",
-			component: SnippetPage,
+			component: () => import("~/components/pages/SnippetPage.vue"),
 			props: router => {
-				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params));
+				const params: UriParameter = JSON.parse(decode(router.params.base64_uri_params.toString()));
 				if (params.type !== "gameJsonUri") {
 					throw new Error("Parse Error: unknown uri parameter");
 				}
@@ -82,14 +73,6 @@ const router = new VueRouter({
 	]
 });
 
-new Vue({
-	el: "#app",
-	components: {
-		IndexPage,
-		RootPage,
-		PlaygroundPage,
-		SamplePage
-	},
-	template: "<RootPage />",
-	router
-});
+const app = createApp(App);
+app.use(router);
+app.mount("#app");

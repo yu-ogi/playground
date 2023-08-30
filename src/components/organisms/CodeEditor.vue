@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, PropType, ref, watch } from "@vue/composition-api";
 import * as monaco from "monaco-editor";
+import { defineComponent, inject, onMounted, onUnmounted, PropType, ref, watch } from "vue";
 import { useCodeEditorKey, UseCodeEditorStore } from "~/composables/useCodeEditor";
 
 export default defineComponent({
@@ -27,6 +27,9 @@ export default defineComponent({
 					allowNonTsExtensions: true
 				});
 				monaco.languages.typescript.javascriptDefaults.setExtraLibs(extraLibs);
+			},
+			{
+				deep: true
 			}
 		);
 
@@ -44,6 +47,9 @@ export default defineComponent({
 					});
 				}
 				editor.setModel(model);
+			},
+			{
+				deep: true
 			}
 		);
 

@@ -24,14 +24,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, reactive, watch } from "@vue/composition-api";
+import { marked } from "marked";
+import { defineComponent, provide, reactive, watch } from "vue";
 import DownloadButton from "~/components/molecules/DownloadButton.vue";
 import AkashicEditor from "~/components/templates/AkashicEditor.vue";
 import GameController from "~/components/templates/GameController.vue";
-import { useGameContext, useGameContextKey, UseGameContextStore } from "~/composables/useGameContext";
-import { useGameJSONResolver, useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
+import { useGameContext, useGameContextKey } from "~/composables/useGameContext";
+import { useGameJSONResolver, useGameJSONResolverKey } from "~/composables/useGameJSONResolver";
 
-const marked = require("marked");
 const renderer = new marked.Renderer();
 renderer.link = function (href: string, title: string, text: string) {
 	const link = marked.Renderer.prototype.link.call(this, href, title, text);
@@ -73,10 +73,10 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		provide(useGameJSONResolverKey, useGameJSONResolver());
-		provide(useGameContextKey, useGameContext());
-		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
-		const gameContext = inject(useGameContextKey) as UseGameContextStore;
+		const gameConfs = useGameJSONResolver();
+		const gameContext = useGameContext();
+		provide(useGameJSONResolverKey, gameConfs);
+		provide(useGameContextKey, gameContext);
 
 		gameConfs.fetchPseudoFilesFromUri(props.gameJsonUri);
 
@@ -91,6 +91,9 @@ export default defineComponent({
 			([title, description]) => {
 				state.title = title ?? null;
 				state.description = description ? marked(description) : null;
+			},
+			{
+				deep: true
 			}
 		);
 
@@ -107,6 +110,9 @@ export default defineComponent({
 					);
 					// 重複ロジックここまで
 				}
+			},
+			{
+				deep: true
 			}
 		);
 
@@ -156,9 +162,8 @@ export default defineComponent({
 	}
 
 	.container-editor {
-		width: 100%;
+		overflow: hidden;
 		height: 100%;
-		overflow: visible;
 		display: flex;
 		flex-direction: row;
 		position: relative;
@@ -183,13 +188,9 @@ export default defineComponent({
 	}
 
 	.container-agv {
-		width: 100%;
 		flex-direction: column;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
+		position: relative;
+		background-color: white;
 	}
 
 	.container-agv-meta {

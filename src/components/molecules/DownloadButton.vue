@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from "@vue/composition-api";
+import { defineComponent, reactive, PropType } from "vue";
 import Button from "~/components/atoms/Button.vue";
 import { PseudoFile } from "~/types/PseudoFile";
 import { downloadAsZip } from "~/utils/downloadAsZip";

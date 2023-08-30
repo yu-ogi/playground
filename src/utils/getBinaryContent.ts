@@ -1,4 +1,5 @@
-const JSZipUtils = require("jszip-utils");
+// @ts-ignore FIXME: 型定義が存在するモジュールへの変更を検討
+import JSZipUtils from "jszip-utils";
 
 export function getBinaryContent(url: string) {
 	return new Promise<ArrayBuffer>((resolve, reject) => {

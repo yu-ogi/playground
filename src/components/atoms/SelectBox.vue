@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, watch } from "@vue/composition-api";
+import { defineComponent, PropType, reactive, watch } from "vue";
 
 interface State {
 	value: string;

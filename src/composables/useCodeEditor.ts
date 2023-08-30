@@ -1,4 +1,4 @@
-import { InjectionKey, reactive } from "@vue/composition-api";
+import { InjectionKey, reactive } from "vue";
 
 export const useCodeEditorKey: InjectionKey<UseCodeEditorStore> = Symbol("useCodeEditor");
 

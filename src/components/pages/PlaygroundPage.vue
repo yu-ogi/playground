@@ -20,13 +20,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, reactive } from "@vue/composition-api";
+import { defineComponent, provide, reactive } from "vue";
 
 import DownloadButton from "~/components/molecules/DownloadButton.vue";
 import AkashicEditor from "~/components/templates/AkashicEditor.vue";
 import GameController from "~/components/templates/GameController.vue";
 import { useGameContext, useGameContextKey } from "~/composables/useGameContext";
-import { useGameJSONResolver, useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
+import { useGameJSONResolver, useGameJSONResolverKey } from "~/composables/useGameJSONResolver";
 
 interface State {
 	edited: boolean;
@@ -58,9 +58,9 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		provide(useGameJSONResolverKey, useGameJSONResolver());
+		const gameConfs = useGameJSONResolver();
+		provide(useGameJSONResolverKey, gameConfs);
 		provide(useGameContextKey, useGameContext());
-		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
 		gameConfs.fetchPseudoFilesFromUri(props.gameJsonUri);
 
 		const state = reactive<State>({
@@ -169,9 +169,10 @@ export default defineComponent({
 	.container-agv {
 		margin: 0 auto;
 		display: flex;
+		overflow: visible;
 		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
+		position: relative;
+		background-color: white;
 	}
 
 	.container-download {
@@ -179,7 +180,6 @@ export default defineComponent({
 		bottom: 3px;
 		right: 3px;
 		color: whitesmoke;
-		z-index: 1;
 	}
 }
 </style>

@@ -1,11 +1,9 @@
-import { InjectionKey, reactive } from "@vue/composition-api";
-import Vue from "vue";
+import { InjectionKey, reactive } from "vue";
+import versions from "~/constants/versions.json" assert { type: "json" };
 import { GameConfiguration } from "~/types/AkashicEngineStandalone";
 import { ConsoleValue } from "~/types/ConsoleValue";
 import { PseudoFile } from "~/types/PseudoFile";
 import { AkashicEngineVersion } from "~/types/versions";
-
-const versions: AkashicEngineVersion = require("~/constants/versions.json");
 
 export const useGameContextKey: InjectionKey<UseGameContextStore> = Symbol("useGameContext");
 
@@ -49,13 +47,14 @@ export function useGameContext() {
 	}
 
 	const handleErrors = (global: any) => {
-		Vue.config.errorHandler = err => {
-			addConsole({
-				type: "error",
-				name: err.toString(),
-				message: err.message
-			});
-		};
+		// FIXME:
+		// Vue.config.errorHandler = err => {
+		// 	addConsole({
+		// 		type: "error",
+		// 		name: err.toString(),
+		// 		message: err.message
+		// 	});
+		// };
 		const window = global as Window;
 		window.removeEventListener("error", handleError);
 		window.addEventListener("error", handleError);
@@ -161,7 +160,7 @@ export function useGameContext() {
 		consoleValues: [],
 		canvas: null,
 		currentVersion: versions.akashicEngineVersions[0].version,
-		versions,
+		versions: versions as AkashicEngineVersion,
 		handleErrors,
 		requireEngineJS,
 		setCanvas,

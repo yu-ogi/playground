@@ -1,18 +1,19 @@
-/////
-import VueCompositionApi from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
 import ImageViewer from "~/components/molecules/ImageViewer.vue";
 
-export default {
-	title: "molecules / ImageViewer"
+const meta: Meta<typeof ImageViewer> = {
+	title: "molecules / ImageViewer",
+	component: ImageViewer,
 };
+export default meta;
 
-export const Default = () => ({
-	components: { ImageViewer },
-	template: `<ImageViewer title="akashic" src="/default/image/player.png" :width="32" :height="32" />`
-});
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	args: {
+		title: "akashic",
+		src: "/default/image/player.png",
+		width: 32,
+		height: 32
+	}
+};

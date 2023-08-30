@@ -1,11 +1,6 @@
-import VueCompositionApi from "@vue/composition-api";
-import { createLocalVue } from "@vue/test-utils";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { useExtraLibsResolver } from "~/composables/useExtraLibsResolver";
-
-const localVue = createLocalVue();
-localVue.use(VueCompositionApi);
 
 describe("useExtraLibsResolver", () => {
 	let mockAxios: MockAdapter;
