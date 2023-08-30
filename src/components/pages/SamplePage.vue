@@ -187,14 +187,6 @@ export default defineComponent({
 		flex-direction: column;
 	}
 
-	.container-body {
-		width: 100%;
-		height: calc(100% - 45px);
-		display: flex;
-		flex-direction: row;
-		flex-direction: column;
-	}
-
 	.container-agv {
 		flex-direction: column;
 		position: relative;
@@ -222,7 +214,7 @@ export default defineComponent({
 	.container-editor {
 		width: 100%;
 		height: 100%;
-		overflow: scroll;
+		overflow: visible;
 		display: flex;
 		flex-direction: row;
 		position: relative;
