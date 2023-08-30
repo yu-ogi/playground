@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import monacoEditorPlugin from "vite-plugin-monaco-editor";
 
 export default defineConfig({
+	base: "", // NOTE: 成果物を相対パスとして出力
 	plugins: [
 		monacoEditorPlugin({}),
 		createVuePlugin()
