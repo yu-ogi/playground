@@ -23,7 +23,7 @@ const router = createRouter({
 			props: router => {
 				const gameJsonUri = urlJoin(
 					`${window.location.protocol}//${window.location.host}`,
-					window.location.pathname,
+					window.location.pathname === "/" ? "" : window.location.pathname,
 					`presets/${router.params.name}/game.json`
 				);
 				return {
