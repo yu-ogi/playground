@@ -41,6 +41,10 @@ export async function downloadAsZip(name: string, pseudoFiles: PseudoFile[]) {
 			} catch (e) {
 				console.error(e);
 			}
+		} else if (file.assetType === "binary") {
+			const dir = zip.folder(path.dirname(file.path));
+			if (!dir) continue;
+			dir.file(file.filename, file.blob, { binary: true });
 		}
 	}
 

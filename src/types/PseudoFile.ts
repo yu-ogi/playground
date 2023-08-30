@@ -62,6 +62,7 @@ export interface PseudoAudioAssetFile extends PseudoAssetFile {
 export interface PseudoBinaryAssetFile extends PseudoAssetFile {
 	assetType: "binary";
 	editorType: "binary";
+	blob: Blob;
 }
 
 export interface PseudoUnknownAssetFile extends PseudoAssetFile {

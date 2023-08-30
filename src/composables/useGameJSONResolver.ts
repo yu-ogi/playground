@@ -197,6 +197,7 @@ export function useGameJSONResolver() {
 				global
 			};
 		} else if (asset.type === "binary") {
+			const blob = (await axios.get(uri, { responseType: "blob" })).data;
 			return {
 				id: assetId,
 				name: assetId,
@@ -205,6 +206,7 @@ export function useGameJSONResolver() {
 				editorType: "binary",
 				path: asset.path,
 				filename,
+				blob,
 				global
 			};
 		} else {
