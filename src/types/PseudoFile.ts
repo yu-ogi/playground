@@ -5,6 +5,7 @@ export type PseudoFile =
 	| PseudoImageAssetFile
 	| PseudoVectorImageAssetFile
 	| PseudoAudioAssetFile
+	| PseudoBinaryAssetFile
 	| PseudoUnknownAssetFile;
 
 export interface PseudoGameJSONFile {
@@ -56,6 +57,11 @@ export interface PseudoAudioAssetFile extends PseudoAssetFile {
 	systemId: any;
 	loop: boolean;
 	hint?: any;
+}
+
+export interface PseudoBinaryAssetFile extends PseudoAssetFile {
+	assetType: "binary";
+	editorType: "binary";
 }
 
 export interface PseudoUnknownAssetFile extends PseudoAssetFile {

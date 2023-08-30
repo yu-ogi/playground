@@ -1,19 +1,17 @@
-/////
-
-import VueCompositionApi from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
 import AudioPlayer from "~/components/molecules/AudioPlayer.vue";
 
-export default {
-	title: "molecules / AudioPlayer"
+const meta: Meta<typeof AudioPlayer> = {
+	title: "molecules / AudioPlayer",
+	component: AudioPlayer
 };
+export default meta;
 
-export const Default = () => ({
-	components: { AudioPlayer },
-	template: `<AudioPlayer title="se" duration="1" src="/default/audio/se" />`
-});
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	args: {
+		title: "se",
+		src: "/default/audio/se"
+	}
+};

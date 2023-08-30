@@ -1,9 +1,9 @@
-import * as path from "path";
-import { InjectionKey, reactive } from "@vue/composition-api";
 import axios from "axios";
 import urlJoin from "url-join";
+import { InjectionKey, reactive } from "vue";
 import { Asset, GameConfiguration } from "~/types/AkashicEngineStandalone";
 import { PseudoFile } from "~/types/PseudoFile";
+import { basename, dirname, extname, resolve } from "~/utils/path";
 
 export const useGameJSONResolverKey: InjectionKey<UseGameJSONResolverStore> = Symbol("useGameJSONResolver");
 
@@ -44,7 +44,7 @@ export function useGameJSONResolver() {
 	 */
 	const fetchPseudoFilesFromUri = async (uri: string) => {
 		const gameJSON = await getGameJSONFromUri(uri);
-		return await fetchPseudoFilesFromGameJSON(gameJSON, path.dirname(uri));
+		return fetchPseudoFilesFromGameJSON(gameJSON, dirname(uri));
 	};
 
 	/**
@@ -62,18 +62,20 @@ export function useGameJSONResolver() {
 			};
 		});
 
+		const dummyUrl = "http://127.0.0.1";
+		const entryUrl = resolve(dummyUrl, gameJSON.main);
 		const entryAsset = assets.find(asset => {
-			// NOTE: path.relative() によりエントリポイントと同一であるかを判定
-			// (空文字列 "" であれば同一と判断)
-			return path.relative(asset.path, gameJSON.main) === "";
+			// NOTE: URL.resolve() によりエントリポイントと同一であるかを判定
+			const assetUrl = resolve(dummyUrl, asset.path);
+			return assetUrl === entryUrl;
 		});
 
-		const pseudoFiles: PseudoFile[] = (await Promise.all(assets.map(asset => generatePseudoFileFromAsset(asset.id, asset, assetBase))))
-			// TODO: ソートしたいけどなぜか型が推論できない
-			.sort((a, b) => {
-				const order = ["text", "image", "audio", "unknown"];
-				return order.indexOf(a.assetType) - order.indexOf(b.assetType);
-			}) as any;
+		const pseudoFiles: PseudoFile[] = (
+			await Promise.all(assets.map(asset => generatePseudoFileFromAsset(asset.id, asset, assetBase)))
+		).sort((a, b) => {
+			const order = ["script", "text", "image", "vector-image", "audio", "binary", "unknown"];
+			return order.indexOf(a.assetType) - order.indexOf(b.assetType);
+		});
 
 		if (gameJSON.globalScripts) {
 			const globalScriptAssets = generateScriptAssetFromModuleScripts(gameJSON.globalScripts);
@@ -126,7 +128,7 @@ export function useGameJSONResolver() {
 
 	const generatePseudoFileFromAsset = async (assetId: string, asset: Asset, assetBase: string): Promise<PseudoFile> => {
 		const uri = urlJoin(assetBase, asset.path);
-		const filename = path.basename(asset.path);
+		const filename = basename(asset.path);
 		const global = !!asset.global;
 
 		if (asset.type === "script") {
@@ -150,13 +152,7 @@ export function useGameJSONResolver() {
 			};
 		} else if (asset.type === "text") {
 			const ret = await axios.get(uri, { responseType: "text" });
-			let value = ret.data;
-			let ext = ".txt";
-			// NOTE: responseType: "text" にも関わらず object を受け取ったら json とみなす
-			if (typeof value !== "string") {
-				ext = ".json";
-				value = JSON.stringify(value, undefined, 2);
-			}
+			const value = ret.data;
 			return {
 				id: assetId,
 				name: assetId,
@@ -165,7 +161,7 @@ export function useGameJSONResolver() {
 				editorType: "text",
 				path: asset.path,
 				filename,
-				language: ext === ".json" ? "json" : "text",
+				language: extname(uri) === ".json" ? "json" : "text",
 				value,
 				global
 			};
@@ -200,6 +196,17 @@ export function useGameJSONResolver() {
 				loop: !!asset.loop,
 				global
 			};
+		} else if (asset.type === "binary") {
+			return {
+				id: assetId,
+				name: assetId,
+				uri,
+				assetType: asset.type,
+				editorType: "binary",
+				path: asset.path,
+				filename,
+				global
+			};
 		} else {
 			return {
 				id: assetId,
@@ -216,6 +223,7 @@ export function useGameJSONResolver() {
 
 	/**
 	 * game.json のデータを生成する
+	 * FIXME: 改善の余地あり
 	 */
 	const generateGameJSON = (cascadeGameJSON?: GameConfiguration) => {
 		if (cascadeGameJSON) {
@@ -277,6 +285,12 @@ export function useGameJSONResolver() {
 					duration: asset.duration,
 					systemId: asset.systemId,
 					hint: asset.hint,
+					global: asset.global
+				};
+			} else if (asset.assetType === "binary") {
+				gameJSON.assets[asset.id] = {
+					type: "binary",
+					path: asset.path,
 					global: asset.global
 				};
 			}

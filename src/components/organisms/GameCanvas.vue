@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from "@vue/composition-api";
+import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from "vue";
 
 export default defineComponent({
 	props: {
@@ -76,6 +76,9 @@ export default defineComponent({
 			() => [props.width, props.height],
 			() => {
 				adjust();
+			},
+			{
+				deep: true
 			}
 		);
 

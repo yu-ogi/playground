@@ -1,40 +1,32 @@
-/////
-
-import VueCompositionApi from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
 import ConsoleViewer from "~/components/molecules/ConsoleViewer.vue";
 
-export default {
-	title: "molecules / ConsoleViewer"
+const meta: Meta<typeof ConsoleViewer> = {
+	title: "molecules / ConsoleViewer",
+	component: ConsoleViewer,
 };
+export default meta;
 
-export const Default = () => ({
-	components: { ConsoleViewer },
-	setup: () => {
-		return {
-			values: [
-				{
-					type: "error",
-					name: "dummy",
-					message: "dumm message"
-				},
-				{
-					type: "warn",
-					name: "dummy",
-					message: "dumm message"
-				},
-				{
-					type: "info",
-					name: "dummy",
-					message: "dumm message dumm message dumm message dumm message dumm message dumm message dumm message dumm message"
-				}
-			]
-		};
-	},
-	template: `<ConsoleViewer :values="values" />`
-});
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	args: {
+		values: [
+			{
+				type: "error",
+				name: "dummy",
+				message: "dumm message"
+			},
+			{
+				type: "warn",
+				name: "dummy",
+				message: "dumm message"
+			},
+			{
+				type: "info",
+				name: "dummy",
+				message: "dumm message dumm message dumm message dumm message dumm message dumm message dumm message dumm message"
+			}
+		]
+	}
+};

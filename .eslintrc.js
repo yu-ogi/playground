@@ -8,6 +8,12 @@ module.exports = {
       jsx: true
     }
   },
+  env: {
+    node: true
+  },
+  globals: {
+    AE: true
+  },
   plugins: [
     "import",
     "unused-imports"
@@ -18,6 +24,7 @@ module.exports = {
     "prettier",
     "prettier/vue",
     "prettier/@typescript-eslint",
+    "plugin:storybook/recommended"
   ],
   ignorePatterns: "public/**/*.d.ts",
   rules: {
@@ -35,8 +42,5 @@ module.exports = {
     "unused-imports/no-unused-vars-ts": [
       "off" // TODO: 誤検知のため一旦 off
     ]
-  },
-  globals: {
-    AE: true
   }
 }

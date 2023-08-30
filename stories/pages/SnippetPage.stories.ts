@@ -1,35 +1,36 @@
-/////
-import VueCompositionApi from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
 import SnippetPage from "~/components/pages/SnippetPage.vue";
 
-/////
+const meta: Meta<typeof SnippetPage> = {
+	title: "pages / SnippetPage",
+	component: SnippetPage,
+};
+export default meta;
 
-export default {
-	title: "pages / SnippetPage"
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	render: () => ({
+		components: {
+			SnippetPage,
+		},
+		template: `
+		<div style="height: 100vh;">
+			<SnippetPage gameJsonUri="/default/game.json" name="dummy" />
+		</div>
+		`
+	})
 };
 
-export const Default = () => ({
-	components: { SnippetPage },
-	template: `
-	<div style="height: 100vh;">
-		<SnippetPage gameJsonUri="/default/game.json" name="dummy" />
-	</div>
-	`
-});
-
-export const Autorun = () => ({
-	components: { SnippetPage },
-	template: `
-	<div style="height: 100vh;">
-		<SnippetPage gameJsonUri="/default/game.json" name="dummy" :autoplay="true" />
-	</div>
-	`
-});
+export const Autorun: Story = {
+	render: () => ({
+		components: {
+			SnippetPage,
+		},
+		template: `
+		<div style="height: 100vh;">
+			<SnippetPage gameJsonUri="/default/game.json" name="dummy" :autoplay="true" />
+		</div>
+		`
+	})
+};

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "@vue/composition-api";
+import { defineComponent, onMounted, ref, watch } from "vue";
 
 interface State {
 	src: string;

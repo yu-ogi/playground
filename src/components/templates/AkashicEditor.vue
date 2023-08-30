@@ -55,12 +55,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, ref, watch, provide } from "@vue/composition-api";
+import { defineComponent, inject, reactive, ref, watch, provide } from "vue";
 import AudioPlayer from "~/components/molecules/AudioPlayer.vue";
 import ConsoleViewer from "~/components/molecules/ConsoleViewer.vue";
 import ImageViewer from "~/components/molecules/ImageViewer.vue";
 import CodeEditor from "~/components/organisms/CodeEditor.vue";
-import { useCodeEditor, useCodeEditorKey, UseCodeEditorStore } from "~/composables/useCodeEditor";
+import { useCodeEditor, useCodeEditorKey } from "~/composables/useCodeEditor";
 import { useExtraLibsResolver } from "~/composables/useExtraLibsResolver";
 import { useGameContextKey, UseGameContextStore } from "~/composables/useGameContext";
 import { useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
@@ -85,10 +85,12 @@ export default defineComponent({
 			handleEditorValueChanged: null
 		});
 
-		provide(useCodeEditorKey, useCodeEditor());
+		const editorState = useCodeEditor();
 		const gameContext = inject(useGameContextKey) as UseGameContextStore;
 		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
-		const editorState = inject(useCodeEditorKey) as UseCodeEditorStore;
+
+		provide(useCodeEditorKey, editorState);
+
 		gameContext.handleErrors(window);
 
 		watch(
@@ -102,15 +104,25 @@ export default defineComponent({
 					() => extLibsResolver.extraLibs,
 					extraLibs => {
 						editorState.setExtraLibs(extraLibs);
+					},
+					{
+						deep: true
 					}
 				);
+			},
+			{
+				deep: true
 			}
 		);
 
 		watch(
 			() => gameConfs.pseudoFiles,
 			pseudoFiles => {
+				console.log("watch");
 				changeCurrentPseudoFile(gameConfs.entryAssetUri);
+			},
+			{
+				deep: true
 			}
 		);
 

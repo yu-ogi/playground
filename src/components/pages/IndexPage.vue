@@ -161,7 +161,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent } from "vue";
 import { encode } from "~/utils/Base64";
 
 export default defineComponent({

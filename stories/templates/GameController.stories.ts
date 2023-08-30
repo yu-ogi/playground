@@ -1,47 +1,28 @@
-/////
-import VueCompositionApi, { inject, provide } from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
+import { provide } from "vue";
 import GameController from "~/components/templates/GameController.vue";
 import { useGameContext, useGameContextKey } from "~/composables/useGameContext";
-import { useGameJSONResolver, useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
+import { useGameJSONResolver, useGameJSONResolverKey } from "~/composables/useGameJSONResolver";
 
-/////
-
-export default {
-	title: "templates / GameController"
+const meta: Meta<typeof GameController> = {
+	title: "templates / GameController",
+	component: GameController,
 };
+export default meta;
 
-export const Default = () => ({
-	components: { GameController },
-	setup: () => {
-		provide(useGameJSONResolverKey, useGameJSONResolver());
-		provide(useGameContextKey, useGameContext());
-		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
-		gameConfs.fetchPseudoFilesFromUri("/large/game.json");
-	},
-	template: `
-	<GameController />
-	`
-});
+type Story = StoryObj<typeof meta>;
 
-export const Large = () => ({
-	components: { GameController },
-	setup: () => {
-		provide(useGameJSONResolverKey, useGameJSONResolver());
-		provide(useGameContextKey, useGameContext());
-		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
-		gameConfs.fetchPseudoFilesFromUri("/large/game.json");
-	},
-	template: `
-	<div style="width: 500px; height: 500px; overflow: scroll;">
-		<GameController />
-	</div>
-	`
-});
+export const Default: Story = {
+	render: () => ({
+		components: {
+			GameController,
+		},
+		setup: () => {
+			const gameConfs = useGameJSONResolver();
+			provide(useGameJSONResolverKey, gameConfs);
+			provide(useGameContextKey, useGameContext());
+			gameConfs.fetchPseudoFilesFromUri("/large/game.json");
+		},
+		template: `<GameController />`
+	})
+};

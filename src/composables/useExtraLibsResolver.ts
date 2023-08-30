@@ -1,5 +1,5 @@
-import { InjectionKey, reactive } from "@vue/composition-api";
 import axios from "axios";
+import { InjectionKey, reactive } from "vue";
 
 export const useExtraLibsResolverKey: InjectionKey<UseExtraLibsResolverStore> = Symbol("useExtraLibsResolver");
 

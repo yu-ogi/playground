@@ -29,12 +29,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, reactive } from "@vue/composition-api";
+import { defineComponent, provide, reactive } from "vue";
 import DownloadButton from "~/components/molecules/DownloadButton.vue";
 import AkashicEditor from "~/components/templates/AkashicEditor.vue";
 import GameController from "~/components/templates/GameController.vue";
-import { useGameContext, useGameContextKey, UseGameContextStore } from "~/composables/useGameContext";
-import { useGameJSONResolver, useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";
+import { useGameContext, useGameContextKey } from "~/composables/useGameContext";
+import { useGameJSONResolver, useGameJSONResolverKey } from "~/composables/useGameJSONResolver";
 
 export interface State {
 	currentPageTabName: string;
@@ -71,10 +71,10 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		provide(useGameJSONResolverKey, useGameJSONResolver());
-		provide(useGameContextKey, useGameContext());
-		const gameConfs = inject(useGameJSONResolverKey) as UseGameJSONResolverStore;
-		const gameContext = inject(useGameContextKey) as UseGameContextStore;
+		const gameConfs = useGameJSONResolver();
+		const gameContext = useGameContext();
+		provide(useGameJSONResolverKey, gameConfs);
+		provide(useGameContextKey, gameContext);
 
 		const state = reactive<State>({
 			currentPageTabName: "code",

@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref } from "@vue/composition-api";
+import { defineComponent, inject, onMounted, ref } from "vue";
 import GameCanvas from "~/components/organisms/GameCanvas.vue";
 import { useGameContextKey, UseGameContextStore } from "~/composables/useGameContext";
 import { useGameJSONResolverKey, UseGameJSONResolverStore } from "~/composables/useGameJSONResolver";

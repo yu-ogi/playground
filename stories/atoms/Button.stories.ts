@@ -1,25 +1,23 @@
-import { action } from "@storybook/addon-actions";
-
-/////
-import VueCompositionApi from "@vue/composition-api";
-import Vue from "vue";
-
-Vue.use(VueCompositionApi);
-
-/////
-
+import type { Meta, StoryObj } from "@storybook/vue3";
 import Button from "~/components/atoms/Button.vue";
 
-export default {
-	title: "atoms / Button"
+const meta: Meta<typeof Button> = {
+	title: "atoms / Button",
+	component: Button,
+	render: (args) => ({
+		components: {
+			Button,
+		},
+		setup() {
+			return { args };
+		},
+		template: "<Button v-bind='args'>Click Me</Button>",
+	})
 };
+export default meta;
 
-export const Basic = () => ({
-	components: { Button },
-	setup: () => {
-		return {
-			handleClick: action("button clicked")
-		};
-	},
-	template: '<Button :onClick="handleClick">Click Me</Button>'
-});
+type Story = StoryObj<typeof meta>;
+
+export const Basic: Story = {
+	argTypes: { onClick: { action: 'clicked' } },
+};

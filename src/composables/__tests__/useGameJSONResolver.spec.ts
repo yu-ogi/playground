@@ -1,20 +1,16 @@
-import VueCompositionApi from "@vue/composition-api";
-import { createLocalVue } from "@vue/test-utils";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { useGameJSONResolver } from "~/composables/useGameJSONResolver";
 import { GameConfiguration } from "~/types/AkashicEngineStandalone";
 import {
 	PseudoAudioAssetFile,
+	PseudoBinaryAssetFile,
 	PseudoGameJSONFile,
 	PseudoImageAssetFile,
 	PseudoScriptAssetFile,
 	PseudoTextAssetFile,
 	PseudoUnknownAssetFile
 } from "~/types/PseudoFile";
-
-const localVue = createLocalVue();
-localVue.use(VueCompositionApi);
 
 describe("useGameJSONResolver", () => {
 	let mockAxios: MockAdapter;
@@ -27,7 +23,8 @@ describe("useGameJSONResolver", () => {
 		mockAxios.onGet("base/script/main.js").reply(200, "dummy data (base/script/main.js)");
 		mockAxios.onGet("base/text/text.txt").reply(200, "dummy data (base/text/text.txt)");
 		mockAxios.onGet("base/text/json.json").reply(200, JSON.stringify({ data: "dummy data (base/text/json.json)" }));
-		mockAxios.onGet("base/image/image.png").reply(200, new Blob([], { type: "image/png" }));
+		mockAxios.onGet("base/image/image.png").reply(200, Buffer.from([]));
+		mockAxios.onGet("base/bin/data.bin").reply(200, Buffer.from([]));
 
 		const gameConfiguration: GameConfiguration = {
 			title: "game title",
@@ -63,7 +60,17 @@ describe("useGameJSONResolver", () => {
 					type: "audio",
 					path: "audio/se",
 					duration: 1000,
-					systemId: "sound"
+					systemId: "sound",
+					hint: {
+						prop: "se"
+					}
+				},
+				bin: {
+					type: "binary",
+					path: "bin/data.bin",
+					hint: {
+						prop: "bin"
+					}
 				},
 				unknown: {
 					type: "unknown" as any,
@@ -97,6 +104,8 @@ describe("useGameJSONResolver", () => {
 			imageFile,
 			// se
 			seFile,
+			// data.bin
+			binFile,
 			// unknown
 			unknownFile
 		] = gameJSONResolver.pseudoFiles;
@@ -147,7 +156,15 @@ describe("useGameJSONResolver", () => {
 		expect(se.systemId).toBe("sound");
 		expect(se.duration).toBe(1000);
 		expect(se.filename).toBe("se");
+		expect(se.hint).toEqual({
+			prop: "se"
+		});
 		expect(se.global).toBe(false);
+
+		const bin = binFile as PseudoBinaryAssetFile;
+		expect(bin.assetType).toBe("binary");
+		expect(bin.editorType).toBe("binary");
+		expect(bin.global).toBe(false);
 
 		const unknown = unknownFile as PseudoUnknownAssetFile;
 		expect(unknown.assetType).toBe("unknown");
@@ -158,7 +175,6 @@ describe("useGameJSONResolver", () => {
 		mockAxios.onGet("base/script/main.js").reply(200, "dummy data (base/script/main.js)");
 		mockAxios.onGet("base/text/text.txt").reply(200, "dummy data (base/text/text.txt)");
 		mockAxios.onGet("base/text/json.json").reply(200, JSON.stringify({ data: "dummy data (base/text/json.json)" }));
-		mockAxios.onGet("base/image/image.png").reply(200, new Blob([], { type: "image/png" }));
 
 		const gameConfiguration: GameConfiguration = {
 			title: "game title",
